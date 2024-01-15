@@ -15,33 +15,34 @@ public class Main {
         st = new StringTokenizer(br.readLine());
         long q = Long.parseLong(st.nextToken());
 
+        StringBuilder sb = new StringBuilder();
         for(int t=0;t<q;t++){
             st = new StringTokenizer(br.readLine());
-            int n = Integer.parseInt(st.nextToken());
-            int l = Integer.parseInt(st.nextToken());
-            int r = Integer.parseInt(st.nextToken());
+            long n =  Long.parseLong(st.nextToken());
+            long l =  Long.parseLong(st.nextToken());
+            long r =  Long.parseLong(st.nextToken());
 
             if(n==1) {
                 long sum = 0;
 
-                int len = r-l+1;
+                long len = r-l+1;
                 if(len%2==1){
                     sum = (a+d*((r+l)/2-1))*len; // 중간값 * 길이
                 }else {
                     sum = len * ((a + (l-1)*d)+(a + (r-1)*d)) /2; //l과r항의 평균 * 길이
                 }
-                System.out.println(sum);
+                sb.append(sum+"\n");
 
             }else {
                 if(l==r){
-                    System.out.println(a+((l-1)*d));
+                    sb.append(a+((l-1)*d)+"\n");
                 }else {
-                    System.out.println(getGCD(a, d));
+                    sb.append(getGCD(a, d)+"\n");
                 }
             }
 
         }
-
+        System.out.println(sb.toString());
 
     }
 
@@ -53,11 +54,5 @@ public class Main {
         }
         return x;
     }
-
-
-
-
-
-
 
 }
