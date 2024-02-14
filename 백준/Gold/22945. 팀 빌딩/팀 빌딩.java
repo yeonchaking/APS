@@ -1,32 +1,44 @@
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.security.spec.RSAOtherPrimeInfo;
+import java.util.*;
 
 public class Main {
-	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
-		int n = sc.nextInt();
-		int [] arr = new int[n];
-		for(int i=0;i<n;i++) {
-			arr[i]= sc.nextInt();
-		}
-		
-		int L = 0;
-		int R = n-1;
-		
-		int max = 0;
-		
-		int now = 0;
-		while(L<R) {
-			now = Math.min(arr[L],arr[R])*(R-L-1);
-			if(now>max) {
-				max = now;
-			}
-			if(arr[L]>arr[R]) {
-				R--;
-			}else {
-				L++;
-			}
-		}		
-		System.out.println(max);
-	}
-	
+
+    static int [] arr;
+    static int n;
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        n = Integer.parseInt(br.readLine());
+        StringTokenizer st = new StringTokenizer(br.readLine());
+         arr = new int[n];
+
+        for(int i=0;i<n;i++){
+            arr[i]=Integer.parseInt(st.nextToken());
+        }
+        int s =0;
+        int e = n-1;
+        int max = Math.max(0, cal(s,e));
+        while(s<e){
+            int x = cal(s,e);
+            if(max<x)max =x;
+//            System.out.println(s+" "+e);
+            if(arr[s]>arr[e]){
+                e--;
+            }else {
+                s++;
+            }
+//            System.out.println(max);
+        }
+
+        System.out.println(max);
+    }
+
+
+
+    static int cal(int s, int e){
+        return Math.min(arr[s],arr[e])*(e-s-1);
+    }
+
 }
