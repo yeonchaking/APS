@@ -4,29 +4,28 @@ import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
 public class Main {
-
-    static int n;
-    static int[][] arr;
-    static int[] dp;
-
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        n = Integer.parseInt(br.readLine());
         StringTokenizer st;
-        arr = new int[n][2];
-        for (int i = 0; i < n; i++) {
+        int n = Integer.parseInt(br.readLine());
+        int[] t = new int[n + 1];
+        int[] p = new int[n + 1];
+        int[] dp = new int[n + 2];
+
+        for (int i = 1; i <= n; i++) {
             st = new StringTokenizer(br.readLine());
-            arr[i][0] = Integer.parseInt(st.nextToken());
-            arr[i][1] = Integer.parseInt(st.nextToken());
+            t[i] = Integer.parseInt(st.nextToken());
+            p[i] = Integer.parseInt(st.nextToken());
         }
-        dp = new int[n + 1];
-        for (int i = n - 1; i >= 0; i--) {
-            if (i + arr[i][0] > n) {
-                dp[i] = dp[i + 1];
+
+        for (int i = n; i > 0; i--) {
+            if (i + t[i] <= n + 1) {
+                dp[i] = Math.max(dp[i + 1], dp[i + t[i]] + p[i]);
             } else {
-                dp[i] = Math.max(dp[i + 1], dp[i + arr[i][0]] + arr[i][1]);
+                dp[i] = dp[i + 1];
             }
         }
-        System.out.println(dp[0]);
+
+        System.out.println(dp[1]);
     }
 }
